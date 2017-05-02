@@ -14,4 +14,8 @@ RUN apt-get update \
       lsb-release \
       python-all \
       rlwrap \
+      zip \
  && rm -rf /var/lib/apt/lists/*;
+
+#Install Iron CLI
+RUN curl -sSL http://get.iron.io/cli | sh
