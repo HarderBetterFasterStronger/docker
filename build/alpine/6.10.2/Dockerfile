@@ -6,7 +6,7 @@ ENV VERSION=v6.10.2 NPM_VERSION=3
 # ENV VERSION=v7.9.0 NPM_VERSION=4
 
 # For base builds
-ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
+ENV CONFIG_FLAGS="--fully-static" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
 RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
   gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
@@ -28,12 +28,8 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnup
   cd / && \
   if [ -x /usr/bin/npm ]; then \
     npm install -g npm@${NPM_VERSION} && \
-    find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
-  fi && \
-  apk del make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS} && \
-  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
-    /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
-    /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
+   find /usr/lib/node_modules/npm -name test -o -name .bin -type d; \
+  fi
 
 #install iron.io
 RUN curl -sSL http://get.iron.io/cli | sh
