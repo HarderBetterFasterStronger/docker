@@ -10,9 +10,9 @@ RUN npm install -g pangyp\
  && npm cache clear\
  && node-gyp configure || echo ""
 
-ENV NODE_ENV production
-WORKDIR /usr/src/app
-CMD ["npm","start"]
+#ENV NODE_ENV production
+#WORKDIR /usr/src/app
+#CMD ["npm","start"]
 
 RUN apt-get update \
  && apt-get upgrade -y --force-yes \
