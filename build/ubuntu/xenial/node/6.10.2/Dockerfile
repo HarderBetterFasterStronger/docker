@@ -1,4 +1,4 @@
-FROM mrfinks/docker:build.ubuntu.xenial.node.base
+FROM sfinkel/docker:build.ubuntu.xenial.node.base
 MAINTAINER SF <mrfinks@github.com>
 
 RUN curl https://deb.nodesource.com/node_6.x/pool/main/n/nodejs/nodejs_6.10.2-1nodesource1~xenial1_amd64.deb > node.deb \
