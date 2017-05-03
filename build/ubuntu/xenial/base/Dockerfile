@@ -15,6 +15,7 @@ RUN apt-get update \
       python-all \
       rlwrap \
       zip \
+      bash
  && rm -rf /var/lib/apt/lists/*;
 
 #Install Iron CLI
