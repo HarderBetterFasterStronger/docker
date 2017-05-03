@@ -24,11 +24,10 @@ RUN curl -sSL http://get.iron.io/cli | sh
  #Install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \ 
  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
- && apt-get update && apt-get install -y yarn
-
-RUN echo 'export PATH="$PATH:`yarn global bin`"' >> ~/.bashrc
-RUN echo 'export PATH="$PATH:`yarn global bin`"' >> ~/.bash_profile
-RUN echo 'export PATH="$PATH:`yarn global bin`"' >> ~/.zshrc
+ && apt-get update && apt-get install -y yarn \
+ && echo 'export PATH="$PATH:`yarn global bin`"' >> ~/.bashrc \
+ && echo 'export PATH="$PATH:`yarn global bin`"' >> ~/.bash_profile \
+ && echo 'export PATH="$PATH:`yarn global bin`"' >> ~/.zshrc
 
 RUN rm -rf /var/lib/apt/lists/*;
 
