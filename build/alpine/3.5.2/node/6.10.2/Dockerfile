@@ -1,4 +1,4 @@
-FROM sfinkel/build:alpine.3.5.2.base
+FROM sfinkel/docker:build.alpine.3.5.base
 MAINTAINER SF <mrfinks@github.com>
 
 # ENV VERSION=v4.8.2 NPM_VERSION=2
