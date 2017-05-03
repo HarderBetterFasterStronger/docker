@@ -1,10 +1,6 @@
 FROM ubuntu:xenial
 MAINTAINER SF <mrfinks@github.com>
 
-#Install yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
 RUN apt-get update \
  && apt-get install -y --force-yes --no-install-recommends\
       apt-transport-https \
@@ -20,9 +16,15 @@ RUN apt-get update \
       rlwrap \
       zip \
       bash \
-      yarn
  && rm -rf /var/lib/apt/lists/*;
 
 #Install Iron CLI
 RUN curl -sSL http://get.iron.io/cli | sh
+
+ #Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \ 
+ && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+ && apt-get update && apt-get -y install yarn
+
+RUN rm -rf /var/lib/apt/lists/*;
 
