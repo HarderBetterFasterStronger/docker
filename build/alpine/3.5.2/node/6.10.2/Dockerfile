@@ -1,15 +1,14 @@
-FROM alpine:latest
+FROM sfinkel/build:alpine.3.5.2.base
 MAINTAINER SF <mrfinks@github.com>
 
 # ENV VERSION=v4.8.2 NPM_VERSION=2
-ENV VERSION=v6.2.0 NPM_VERSION=3
+ENV VERSION=v6.10.2 NPM_VERSION=3
 # ENV VERSION=v7.9.0 NPM_VERSION=4
 
 # For base builds
-ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
+ENV CONFIG_FLAGS="--fully-static" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
-RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++ && \
-  gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
+RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
     71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
@@ -34,15 +33,3 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnup
   rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
-
-#install iron.io
-RUN curl -sSL http://get.iron.io/cli | sh
-RUN iron --version
-
-#install zip command
-RUN apk --update add zip
-
-#install ssh
-RUN apk add openssh
-
-

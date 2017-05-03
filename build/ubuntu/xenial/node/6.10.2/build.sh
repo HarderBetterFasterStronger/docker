@@ -1,3 +1,2 @@
 #!/bin/bash
-folder=$(basename "$PWD")
-docker build . -t $folder 
+docker build . -t "ubuntu.xenial.node.6.10.2"
