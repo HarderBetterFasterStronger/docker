@@ -2,7 +2,7 @@ FROM sfinkel/docker:build.alpine.3.5.base
 MAINTAINER SF <mrfinks@github.com>
 
 # ENV VERSION=v4.8.2 NPM_VERSION=2
-ENV VERSION=v6.10.2 NPM_VERSION=3
+ENV VERSION=v6.10.3 NPM_VERSION=3
 # ENV VERSION=v7.9.0 NPM_VERSION=4
 
 # For base builds
@@ -34,4 +34,5 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
 
-RUN echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories && apk add --no-cache yarn
+RUN echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories && apk add --no-cache yarn 
+
