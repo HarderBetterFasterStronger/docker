@@ -13,7 +13,5 @@ RUN apk update && apk add --no-cache \
     libstdc++ \
     bash \
     openssh \
-    zip
-
-#Install Iron CLI
-RUN curl -sSL http://get.iron.io/cli | sh
+    zip \
+    && curl -sSL http://get.iron.io/cli | sh
