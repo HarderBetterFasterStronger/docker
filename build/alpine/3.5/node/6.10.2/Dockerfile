@@ -1,4 +1,4 @@
-FROM sfinkel/docker:build.alpine.3.5.base
+FROM sfinkel/docker:alpine.3.5.base
 MAINTAINER SF <mrfinks@github.com>
 
 # ENV VERSION=v4.8.2 NPM_VERSION=2
@@ -8,7 +8,17 @@ ENV VERSION=v6.10.2 NPM_VERSION=3
 # For base builds
 ENV CONFIG_FLAGS="--fully-static" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
+RUN apk update && apk add --no-cache \
+    curl \
+    make \
+    gcc \
+    g++ \
+    python \
+    linux-headers \
+    binutils-gold \
+    gnupg \
+    libstdc++ \
+ && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
     FD3A5288F042B6850C66B31F09FE44734EB7990E \
     71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
@@ -25,13 +35,13 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys \
   make -j$(getconf _NPROCESSORS_ONLN) && \
   make install && \
   cd / && \
-  if [ -x /usr/bin/npm ]; then \
+  && npm install -g -s --no-progress yarn \
+  && if [ -x /usr/bin/npm ]; then \
     npm install -g npm@${NPM_VERSION} && \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
-  fi && \
-  apk del make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS} && \
-  rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
+  fi \
+  && curl -sSL http://get.iron.io/cli | sh \
+  && apk del curl make gcc g++ python linux-headers binutils-gold gnupg ${DEL_PKGS} \
+  && rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \ 
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
-    /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts \
-    && echo -e 'http://dl-cdn.alpinelinux.org/alpine/edge/main\nhttp://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.alpinelinux.org/alpine/edge/testing' > /etc/apk/repositories \
-    && apk add --no-cache yarn
+    /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
