@@ -1,0 +1,1 @@
+for i in `docker ps -a | awk -F ' ' '{print $1}'`; do echo $i; if [ "$i" != "CONTAINER" ]; then docker container rm $i; fi; done
