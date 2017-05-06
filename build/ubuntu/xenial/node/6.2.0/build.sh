@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build . -t "ubuntu.xenial.node.6.2.0"
+docker build . -t "sfinkel/docker:local.ubuntu.xenial.node.6.2.0"

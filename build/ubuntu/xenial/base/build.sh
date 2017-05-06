@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build . -t "ubuntu.xenial.base"
+docker build . -t "sfinkel/docker:local.ubuntu.xenial.base"
