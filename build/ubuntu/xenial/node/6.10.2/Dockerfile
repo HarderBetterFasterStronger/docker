@@ -1,4 +1,4 @@
-FROM sfinkel/docker:build.ubuntu.xenial.base
+FROM sfinkel/docker:ubuntu.xenial.base
 MAINTAINER SF <mrfinks@github.com>
 
 RUN apt-get update && apt-get install -y curl \
@@ -12,5 +12,4 @@ RUN apt-get update && apt-get install -y curl \
  	&& ln -s $(which pangyp) $(dirname $(which pangyp))/node-gyp \
  	&& npm cache clear \
  	&& node-gyp configure || echo "" \
-	&& npm install -g yarn \
-	&& curl -sSL http://get.iron.io/cli | sh 
+	&& npm install -g yarn
